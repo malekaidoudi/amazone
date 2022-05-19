@@ -6,14 +6,23 @@ body {
 }
 
 header {
-    background-color: #404040;
+    /* background-color: #404040;
     padding: 1rem;
-    width: 100%;
+    width: 100%; */
+}
+
+.container-site {
+    display: flex;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 header a {
-    color: #fff;
+    /* color: #fff;
     font-weight: 700;
     font-size: 18px;
-    text-decoration: none;
+    text-decoration: none; */
 }
