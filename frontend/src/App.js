@@ -12,7 +12,6 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/product/:slug" element={<ProductScreen />} />
         </Routes>
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
       </main>
     </Router>
   );
