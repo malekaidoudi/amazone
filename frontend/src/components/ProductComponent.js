@@ -7,16 +7,18 @@ function dataComponent(props) {
   const { product } = props;
   return (
     <Card>
-      <Link to={`/products/${product.slug}`}>
+      <Link to={`/product/${product.slug}`}>
         <img src={product.image} alt={product.name} className="card-img-top" />
       </Link>
       <Card.Body>
-        <Link to={`/products/${product.slug}`}>
+        <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text> {product.price}€</Card.Text>
-        <Button>Add to cart</Button>
+        <div className="d-grid">
+          <Button>Add to cart</Button>
+        </div>
       </Card.Body>
     </Card>
   );

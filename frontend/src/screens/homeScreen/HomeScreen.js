@@ -3,6 +3,7 @@ import axios from "axios";
 import logger from "use-reducer-logger";
 import { Col, Row } from "react-bootstrap";
 import ProductComponent from "../../components/ProductComponent";
+import { Helmet } from "react-helmet-async";
 import "./homeScreen-style.css";
 
 const reducer = (state, action) => {
@@ -27,7 +28,6 @@ function HomeScreen() {
       error: "",
     }
   );
-  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +50,9 @@ function HomeScreen() {
 
   return (
     <div>
+      <Helmet>
+        <title>Amazone</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {isLoading ? (

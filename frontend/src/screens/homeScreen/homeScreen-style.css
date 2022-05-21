@@ -8,6 +8,7 @@ body {
 .btn-primary {
     background-color: #f0c040;
     color: black;
+    border: #404040 1px solid;
 }
 
 .products {

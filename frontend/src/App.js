@@ -3,7 +3,6 @@ import HomeScreen from "./screens/homeScreen/HomeScreen";
 import ProductScreen from "./screens/productScreen/ProductScreen";
 import { Container, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import "./index.css";
 function App() {
   return (
     <Router>
@@ -18,10 +17,10 @@ function App() {
           </Navbar>
         </header>
         <main>
-          <Container>
+          <Container className="mt-5">
             <Routes>
-              <Route path="/" element={<HomeScreen />} />
               <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
