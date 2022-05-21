@@ -4,7 +4,10 @@ import logger from "use-reducer-logger";
 import { Col, Row } from "react-bootstrap";
 import ProductComponent from "../../components/ProductComponent";
 import { Helmet } from "react-helmet-async";
+import LoadingBox from "../../components/LoadingBox";
+import MessageBox from "../../components/MessageBox";
 import "./homeScreen-style.css";
+import { getError } from "../../utils";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -41,7 +44,7 @@ function HomeScreen() {
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
-          payload: err.message,
+          payload: getError(err),
         });
       }
     };
@@ -56,9 +59,9 @@ function HomeScreen() {
       <h1>Featured Products</h1>
       <div className="products">
         {isLoading ? (
-          <div>Loading...</div>
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox variant="Danger">{error} </MessageBox>
         ) : (
           <Row>
             {products.map((product) => (

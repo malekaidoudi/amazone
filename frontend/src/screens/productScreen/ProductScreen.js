@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { Col, Row, ListGroup, Button, Card, Badge } from "react-bootstrap";
 import Rating from "../../components/Rating";
 import { Helmet } from "react-helmet-async";
+import LoadingBox from "../../components/LoadingBox";
+import MessageBox from "../../components/MessageBox";
+import { getError } from "../../utils";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -39,7 +42,7 @@ function ProductScreen() {
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
-          payload: err.message,
+          payload: getError(err),
         });
       }
     };
@@ -47,9 +50,9 @@ function ProductScreen() {
   }, [slug]);
 
   return isLoading ? (
-    <div>Loading....</div>
+    <LoadingBox />
   ) : error ? (
-    <div>{error}</div>
+    <MessageBox variant="Danger">{error} </MessageBox>
   ) : (
     <Row>
       <Col md={6}>
