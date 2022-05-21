@@ -3,6 +3,7 @@ import HomeScreen from "./screens/homeScreen/HomeScreen";
 import ProductScreen from "./screens/productScreen/ProductScreen";
 import { Container, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import "./index.css";
 function App() {
   return (
     <Router>

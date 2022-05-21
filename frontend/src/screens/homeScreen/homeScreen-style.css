@@ -5,10 +5,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-
-/* .site-container {
-    min-height: 100vh;
-} */
+.btn-primary {
+    background-color: #f0c040;
+    color: black;
+}
 
 .products {
     display: flex;
