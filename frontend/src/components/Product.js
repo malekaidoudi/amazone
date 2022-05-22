@@ -5,7 +5,7 @@ import Rating from "./Rating";
 import { Store } from "../Store";
 import axios from "axios";
 
-function ProductComponent(props) {
+function Product(props) {
   const { product } = props;
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
@@ -47,4 +47,4 @@ function ProductComponent(props) {
   );
 }
 
-export default ProductComponent;
+export default Product;
