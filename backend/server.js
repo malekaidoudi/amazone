@@ -1,7 +1,19 @@
 import express from "express";
 import data from "./data.js";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 const app = express();
-
+dotenv.config();
+//connect to data base
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Success to connect DB");
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+//Routes
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
@@ -25,7 +37,7 @@ app.get("/api/products/:id", (req, res) => {
       .send({ message: "Request failed code 404: Product Not Found" });
   }
 });
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`server at http://localhost/${port}`);
 });
