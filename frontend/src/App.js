@@ -21,11 +21,11 @@ function App() {
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (
-                    <h7 className="d-inline">
+                    <h6 className="d-inline">
                       <Badge pill bg="danger">
-                        {cart.cartItems.length}
+                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                       </Badge>
-                    </h7>
+                    </h6>
                   )}
                 </Link>
               </Nav>
