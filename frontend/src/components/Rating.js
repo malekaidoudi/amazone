@@ -5,7 +5,7 @@ function Rating(props) {
   const { rating, numReviews } = props;
   return (
     <div>
-      <span>
+      <span className="stars">
         <i
           className={
             rating >= 1
@@ -16,7 +16,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span>
+      <span className="stars">
         <i
           className={
             rating >= 2
@@ -27,7 +27,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span>
+      <span className="stars">
         <i
           className={
             rating >= 3
@@ -38,7 +38,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span>
+      <span className="stars">
         <i
           className={
             rating >= 4
@@ -49,7 +49,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span>
+      <span className="stars">
         <i
           className={
             rating >= 5
@@ -60,7 +60,7 @@ function Rating(props) {
           }
         />
       </span>
-      <span style={{ color: "black" }}> {numReviews}</span>
+      <span> {numReviews} reviews</span>
     </div>
   );
 }

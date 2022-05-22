@@ -16,6 +16,10 @@ header {
     min-height: 100vh;
 }
 
+.img-thumbnail {
+    height: 80px;
+}
+
 main {
     flex: 1;
 }
