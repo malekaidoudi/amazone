@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//logger(reducer)
 function HomeScreen() {
   const [{ products, isLoading, error }, dispatch] = useReducer(
     logger(reducer),
@@ -37,6 +37,7 @@ function HomeScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
+        console.log("times");
         dispatch({
           type: "FETCH_SUCCESS",
           payload: result.data,

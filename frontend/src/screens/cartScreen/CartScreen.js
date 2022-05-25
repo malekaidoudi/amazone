@@ -47,7 +47,7 @@ function CartScreen() {
           ) : (
             <ListGroup variant="flush">
               {cartItems.map((el) => (
-                <ListGroup.Item>
+                <ListGroup.Item key={el.id}>
                   <Row className="align-items-center">
                     <Col md={4}>
                       <img
