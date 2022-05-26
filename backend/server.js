@@ -2,10 +2,14 @@ import express from "express";
 import data from "./data.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import seedRouter from "./routes/seedRoute.js";
-import productRouter from "./routes/productRouter.js";
+import seedRouter from "./routes/seedRoutes.js";
+import productRouter from "./routes/productRoutes.js";
+import usersRouter from "./routes/usersRoutes.js";
+import expressAsyncHandler from "express-async-handler";
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/seed", seedRouter);
 dotenv.config();
 //connect to data base
@@ -17,7 +21,13 @@ mongoose
   .catch((err) => console.log(err.message));
 //Routes
 app.use("/api/products", productRouter);
+app.use("/api/users", usersRouter);
+app.use((err, req, res, next) => {
+  res.status(500).send({ message: err.message });
+});
+
 //start server
+
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`server at http://localhost/${port}`);
