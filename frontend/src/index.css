@@ -27,3 +27,11 @@ main {
 .small-container {
     max-width: 600px;
 }
+
+.nav-link {
+    color: white!important;
+}
+
+.nav-link:hover {
+    color: #f1e20c !important;
+}

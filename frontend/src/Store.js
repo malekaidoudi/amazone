@@ -7,6 +7,11 @@ const initState = {
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
   },
+  user: {
+    userInfo: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
+  },
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +34,17 @@ const reducer = (state, action) => {
       );
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "SUCCESS_CONNECTED": {
+      localStorage.setItem("userInfo", JSON.stringify(action.payload));
+      return { ...state, user: { ...state.user, userInfo: action.payload } };
+    }
+    case "FAIL_CONNECTED": {
+      return { ...state, user: { ...state.user, error: action.payload } };
+    }
+    case "DISCONNECT": {
+      localStorage.removeItem("userInfo");
+      return { ...state, user: { ...state.user, userInfo: action.payload } };
     }
     default:
       return state;
