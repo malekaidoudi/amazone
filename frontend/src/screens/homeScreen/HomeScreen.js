@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../../components/LoadingBox";
 import MessageBox from "../../components/MessageBox";
 import "./homeScreen-style.css";
-import { getError } from "../../utils";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -21,7 +20,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-//logger(reducer)
+
 function HomeScreen() {
   const [{ products, isLoading, error }, dispatch] = useReducer(
     logger(reducer),
@@ -37,7 +36,6 @@ function HomeScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const result = await axios.get("/api/products");
-        console.log("times");
         dispatch({
           type: "FETCH_SUCCESS",
           payload: result.data,
@@ -45,7 +43,7 @@ function HomeScreen() {
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
-          payload: getError(err),
+          payload: err.message,
         });
       }
     };

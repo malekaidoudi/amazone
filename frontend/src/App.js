@@ -7,14 +7,16 @@ import { useContext } from "react";
 import { Store } from "./Store";
 import CartScreen from "./screens/cartScreen/CartScreen";
 import SigninScreen from "./screens/signinScreen/SigninScreen";
+import ShippingScreen from "./screens/shippingScreen/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
 function App() {
   const { state, dispatch: cxtDispatch } = useContext(Store);
-  const {
-    cart: { cartItems },
-    user: { userInfo },
-  } = state;
+  const { cart, userInfo } = state;
+
   const signOutHandler = () => {
-    cxtDispatch({ type: "DISCONNECT", payload: null });
+    cxtDispatch({ type: "DISCONNECT" });
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("userInfo");
   };
   return (
     <Router>
@@ -28,33 +30,33 @@ function App() {
               <Nav className="me-auto">
                 <Link to="/cart" className="nav-link">
                   Cart
-                  {cartItems.length > 0 && (
-                    <h6 className="d-inline">
-                      <Badge pill bg="danger">
-                        {cartItems.reduce((a, c) => a + c.quantity, 0)}
-                      </Badge>
-                    </h6>
+                  {cart.cartItems.length > 0 && (
+                    // <h6 className="d-inline">
+                    <Badge pill bg="danger">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </Badge>
+                    // </h6>
                   )}
                 </Link>
               </Nav>
+              {/* essaye de changer */}
               {userInfo ? (
                 <Nav className="me-right">
                   <NavDropdown title={userInfo.name} id="nav-dropdown">
-                    <NavDropdown.Item eventKey="1">
-                      Profile User
-                      {/* <LinkContainer to="/profile"> */}
-                      {/* Profile User */}
-                      {/* </LinkContainer> */}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item eventKey="2">
-                      {/* <LinkContainer to="/orderuser"> */}
-                      Order history
-                      {/* </LinkContainer> */}
-                    </NavDropdown.Item>
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile User</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/orderhistory">
+                      <NavDropdown.Item>Order history</NavDropdown.Item>
+                    </LinkContainer>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item eventKey="3" onClick={signOutHandler}>
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signOutHandler}
+                    >
                       Sign Out
-                    </NavDropdown.Item>
+                    </Link>
                   </NavDropdown>
                 </Nav>
               ) : (
@@ -85,6 +87,8 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              <Route path="/shopping" element={<ShippingScreen />} />
+              <Route path="/payment" element={<PaymentScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
@@ -98,14 +102,3 @@ function App() {
 }
 
 export default App;
-{
-  /* <Nav>
-              <Nav.Link as={Link} to="/login" style={{ paddingRight: "5px" }}>
-                Login
-              </Nav.Link>
-              <Nav.Link disabled>/</Nav.Link>
-              <Nav.Link as={Link} to="/register" style={{ paddingLeft: "1px" }}>
-                Register
-              </Nav.Link>
-            </Nav> */
-}

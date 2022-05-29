@@ -17,9 +17,7 @@ function SigninScreen() {
   const [password, setPassword] = useState();
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const {
-    user: { userInfo },
-  } = state;
+  const { userInfo } = state;
   const signinHandler = async (e) => {
     e.preventDefault();
     await axios
@@ -30,10 +28,6 @@ function SigninScreen() {
         navigate(redirect || "/");
       })
       .catch((err) => {
-        ctxDispatch({
-          type: "FAIL_CONNECTED",
-          payload: err.message,
-        });
         toast.error(getError(err));
       });
   };
@@ -49,23 +43,23 @@ function SigninScreen() {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <h1 className="my-3">Sign In</h1>
+      <h1 className="my-3 inputBox">Sign In</h1>
       <Form onSubmit={signinHandler}>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
+        <Form.Group className="mb-3 inputBox" controlId="email">
           <Form.Control
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <span>Email</span>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="mb-3 inputBox" controlId="password">
           <Form.Control
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <span>Password</span>
         </Form.Group>
         <div className="mb-3">
           <Button type="submit">Sign In</Button>

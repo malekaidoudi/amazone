@@ -7,15 +7,15 @@ import MessageBox from "../../components/MessageBox";
 import { Store } from "../../Store";
 
 function CartScreen() {
+  const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
-  const navigate = useNavigate();
   const removeItemHandler = (item) => {
     ctxDispatch({
       type: "REMOVE-ITEM-CART",
-      payload: { ...item },
+      payload: item,
     });
   };
   const updateQuantityHandler = async (item, quantity) => {
@@ -30,7 +30,7 @@ function CartScreen() {
     });
   };
   const checkoutHandler = () => {
-    navigate("/signin?redirect=/shipping");
+    navigate("/signin?redirect=/shopping");
   };
   return (
     <div>
@@ -47,7 +47,7 @@ function CartScreen() {
           ) : (
             <ListGroup variant="flush">
               {cartItems.map((el) => (
-                <ListGroup.Item key={el.id}>
+                <ListGroup.Item key={el._id}>
                   <Row className="align-items-center">
                     <Col md={4}>
                       <img

@@ -1,16 +1,18 @@
 import { createContext, useReducer } from "react";
+import logger from "use-reducer-logger";
 
 export const Store = createContext();
 const initState = {
+  userInfo: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : null,
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
-  },
-  user: {
-    userInfo: localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo"))
-      : null,
+    shippingAddress: localStorage.getItem("shippingAddress")
+      ? JSON.parse(localStorage.getItem("shippingAddress"))
+      : {},
   },
 };
 const reducer = (state, action) => {
@@ -37,14 +39,24 @@ const reducer = (state, action) => {
     }
     case "SUCCESS_CONNECTED": {
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
-      return { ...state, user: { ...state.user, userInfo: action.payload } };
-    }
-    case "FAIL_CONNECTED": {
-      return { ...state, user: { ...state.user, error: action.payload } };
+
+      return { ...state, userInfo: action.payload };
     }
     case "DISCONNECT": {
-      localStorage.removeItem("userInfo");
-      return { ...state, user: { ...state.user, userInfo: action.payload } };
+      return {
+        userInfo: null,
+        cart: {
+          cartItems: [],
+          shippingAddress: {},
+        },
+      };
+    }
+    case "ADD_SHIPPING_ADDRESS": {
+      localStorage.setItem("shippingAddress", JSON.stringify(action.payload));
+      return {
+        ...state,
+        cart: { ...state.cart, shippingAddress: action.payload },
+      };
     }
     default:
       return state;
@@ -54,5 +66,6 @@ const reducer = (state, action) => {
 export const StoreProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const value = { state, dispatch };
+  // console.log(value);
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 };

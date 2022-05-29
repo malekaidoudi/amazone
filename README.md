@@ -92,3 +92,7 @@
     a- handle submit action
     b- save token in store and local storage
     c- show user name in header
+19- Create Shipping Screen
+    a- create form inputs
+    b- handle save shipping address
+    c- add checkout wizard bar
