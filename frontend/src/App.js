@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import HomeScreen from "./screens/homeScreen/HomeScreen";
-import ProductScreen from "./screens/productScreen/ProductScreen";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
 import { Badge, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useContext } from "react";
 import { Store } from "./Store";
-import CartScreen from "./screens/cartScreen/CartScreen";
-import SigninScreen from "./screens/signinScreen/SigninScreen";
-import ShippingScreen from "./screens/shippingScreen/ShippingScreen";
+import CartScreen from "./screens/CartScreen";
+import SigninScreen from "./screens/SigninScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
-import SignupScreen from "./screens/signupScreen/SignupScreen";
+import SignupScreen from "./screens/SignupScreen";
+import PayMethScreen from "./screens/PayMethScreen";
 function App() {
   const { state, dispatch: cxtDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -18,6 +19,7 @@ function App() {
     cxtDispatch({ type: "DISCONNECT" });
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("paymentMethod");
   };
   return (
     <Router>
@@ -90,6 +92,7 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/shopping" element={<ShippingScreen />} />
+              <Route path="/payment-method" element={<PayMethScreen />} />
               <Route path="/payment" element={<PaymentScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>

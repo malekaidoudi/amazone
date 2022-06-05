@@ -11,6 +11,32 @@ body {
     min-height: 100vh;
 }
 
+.btn-primary {
+    background-color: #f0c040;
+    color: black;
+    border: #404040 1px solid;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img-large {
+    max-width: 100%;
+}
+
+.product img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.product {
+    border: 1px #404040 solid;
+    margin: 1rem;
+}
+
 .img-thumbnail {
     height: 80px;
 }
@@ -40,3 +66,67 @@ main {
     border-bottom: 0.2rem solid #f08000;
     color: #f08000;
 }
+
+.small-container h2 {
+    color: #111;
+    margin-bottom: 45px;
+    margin-top: 30px;
+    Line-height: 1em;
+    font-weight: 500;
+    padding-left: 10px;
+    border-left: 5px solid#f0c040;
+}
+
+.small-container .inputBox {
+    position: relative;
+    width: 300px;
+    height: 60px;
+    margin-bottom: 35px;
+}
+
+.small-container .inputBox:last-child {
+    margin-bottom: 35;
+}
+
+.small-container .inputBox input {
+    position: absolute;
+    top: 0;
+    Left: 0;
+    width: 100%;
+    border: 1px solid#111;
+    background: transparent;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 16px;
+    color: #111;
+    font-weight: 300;
+}
+
+.small-container .inputBox span {
+    position: absolute;
+    top: 1px;
+    Left: 1px;
+    padding: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: #111;
+    font-weight: 300;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.small-container .inputBox input:focus~span,
+.small-container .inputBox input:valid~span {
+    transform: translateX(-10px) translateY(-40px);
+    font-size: 14px
+}
+
+
+/* Button[type="submit"]:hover{
+    background-color: #d1a11e !important;
+    color: #111;
+    border: #111 1px solid;
+    font-weight: 500;
+} */

@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import { Store } from "../../Store";
-import "./formShipping-style.css";
-import CheckoutComponents from "../../components/checkoutComponents";
+import { Store } from "../Store";
+// import "./formShipping-style.css";
+import CheckoutComponents from "../components/checkoutComponents";
 
 function ShippingScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -36,7 +36,7 @@ function ShippingScreen() {
         country,
       },
     });
-    navigate("/payment");
+    navigate("/payment-method");
   };
   return (
     <>

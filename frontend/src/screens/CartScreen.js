@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import MessageBox from "../../components/MessageBox";
-import { Store } from "../../Store";
+import MessageBox from "../components/MessageBox";
+import { Store } from "../Store";
 
 function CartScreen() {
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ function CartScreen() {
                 <ListGroup.Item>
                   <div className="d-grid">
                     <Button
-                      type="button"
+                      type="submit"
                       variant="primary"
                       disabled={cartItems.length === 0}
                       onClick={checkoutHandler}

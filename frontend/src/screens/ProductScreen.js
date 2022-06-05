@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Col, Row, ListGroup, Button, Card, Badge } from "react-bootstrap";
-import Rating from "../../components/Rating";
+import Rating from "../components/Rating";
 import { Helmet } from "react-helmet-async";
-import LoadingBox from "../../components/LoadingBox";
-import MessageBox from "../../components/MessageBox";
-import { getError } from "../../utils";
-import { Store } from "../../Store";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { getError } from "../utils";
+import { Store } from "../Store";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -123,7 +123,9 @@ function ProductScreen() {
               {product.countInStock > 0 && (
                 <ListGroup.Item>
                   <div className="d-grid">
-                    <Button onClick={handleAddToCart}>Add to cart</Button>
+                    <Button type="submit" onClick={handleAddToCart}>
+                      Add to cart
+                    </Button>
                   </div>
                 </ListGroup.Item>
               )}

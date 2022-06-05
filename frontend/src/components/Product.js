@@ -39,7 +39,9 @@ function Product(props) {
           {product.countInStock === 0 ? (
             <Button disabled>Out of Stock</Button>
           ) : (
-            <Button onClick={() => addCartHandler(product)}>Add to Cart</Button>
+            <Button type="submit" onClick={() => addCartHandler(product)}>
+              Add to Cart
+            </Button>
           )}
         </div>
       </Card.Body>

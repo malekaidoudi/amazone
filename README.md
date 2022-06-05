@@ -100,3 +100,6 @@
     a- create form sign up
     b- handle submit
     c- create backend API
+21- Implement select payment method screen
+    a- create form
+    b- handle submit
