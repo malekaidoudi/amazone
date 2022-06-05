@@ -9,6 +9,7 @@ import CartScreen from "./screens/cartScreen/CartScreen";
 import SigninScreen from "./screens/signinScreen/SigninScreen";
 import ShippingScreen from "./screens/shippingScreen/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
+import SignupScreen from "./screens/signupScreen/SignupScreen";
 function App() {
   const { state, dispatch: cxtDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -87,6 +88,7 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />
               <Route path="/shopping" element={<ShippingScreen />} />
               <Route path="/payment" element={<PaymentScreen />} />
               <Route path="/" element={<HomeScreen />} />
