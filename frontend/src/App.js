@@ -11,6 +11,7 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import SignupScreen from "./screens/SignupScreen";
 import PayMethScreen from "./screens/PayMethScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 function App() {
   const { state, dispatch: cxtDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -34,11 +35,9 @@ function App() {
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (
-                    // <h6 className="d-inline">
                     <Badge pill bg="danger">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </Badge>
-                    // </h6>
                   )}
                 </Link>
               </Nav>
@@ -91,15 +90,16 @@ function App() {
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              <Route path="/shopping" element={<ShippingScreen />} />
+              <Route path="/shipping" element={<ShippingScreen />} />
               <Route path="/payment-method" element={<PayMethScreen />} />
               <Route path="/payment" element={<PaymentScreen />} />
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
         <footer>
-          <div className="text-center">All rights reserved</div>
+          <div className="text-center py-3">All rights reserved</div>
         </footer>
       </div>
     </Router>
