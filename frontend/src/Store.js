@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import logger from "use-reducer-logger";
+// import logger from "use-reducer-logger";
 
 export const Store = createContext();
 const initState = {
@@ -39,6 +39,9 @@ const reducer = (state, action) => {
       );
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "CART-CLEAR": {
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     }
     case "SUCCESS_CONNECTED": {
       localStorage.setItem("userInfo", JSON.stringify(action.payload));

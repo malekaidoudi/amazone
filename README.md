@@ -105,5 +105,6 @@
     b- handle submit
 22- Create place order Screen
     a- show cart items, address and payment
-    b- handle place order action
-    c- create order create API
+23- Implement place order action
+    a- handle place order action
+    b- create order create API

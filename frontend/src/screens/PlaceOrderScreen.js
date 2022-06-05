@@ -1,24 +1,84 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import CheckoutComponents from "../components/checkoutComponents";
 import { Helmet } from "react-helmet-async";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Store } from "../Store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { getError } from "../utils";
+import axios from "axios";
+import LoadingBox from "../components/LoadingBox";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "CREATE-REQUEST": {
+      return { ...state, loading: true };
+    }
+    case "CREATE-SUCCESS": {
+      return { ...state, loading: false };
+    }
+    case "CREATE-FAIL": {
+      return { ...state, loading: false };
+    }
+    default: {
+      return state;
+    }
+  }
+};
 
 function PlaceOrderScreen() {
+  const navigate = useNavigate();
+  const [{ loading }, dispatch] = useReducer(reducer, {
+    loading: false,
+  });
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { shippingAddress, paymentMethod, cartItems },
+    userInfo,
   } = state;
-  console.log(cartItems.reduce((a, c) => a + c.price * c.quantity, 0));
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
   const shippingPrice = totalPrice > 100 ? 0 : 5;
   const calculateTax = totalPrice * 0.15;
   const totalOrder = totalPrice + shippingPrice + calculateTax;
+  const placeOrderHandler = async () => {
+    try {
+      console.log("Now");
+      dispatch({ type: "CREATE-REQUEST" });
+      const { data } = await axios.post(
+        "/api/orders",
+        {
+          cartItems,
+          shippingAddress,
+          paymentMethod,
+          totalPrice,
+          shippingPrice,
+          calculateTax,
+          totalOrder,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+      ctxDispatch({ type: "CART-CLEAR" });
+      dispatch({ type: "CREATE-SUCCESS" });
+      localStorage.removeItem("cartItems");
+      navigate(`/order/${data.order._id}`);
+    } catch (error) {
+      dispatch({ type: "CREATE-FAIL" });
+      toast.error(getError(error));
+    }
+  };
+  useEffect(() => {
+    if (!paymentMethod) {
+      navigate("/payment-method");
+    }
+  }, [navigate, paymentMethod]);
   return (
     <>
       <CheckoutComponents step1 step2 step3 step4></CheckoutComponents>
-
+      <ToastContainer position="top-center" />
       <Helmet>
         <title>Place order</title>
       </Helmet>
@@ -127,11 +187,12 @@ function PlaceOrderScreen() {
                   type="submit"
                   variant="primary"
                   disabled={cartItems.length === 0}
-                  //   onClick={checkoutHandler}
+                  onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>
               </div>
+              {loading && <LoadingBox></LoadingBox>}
             </Card.Body>
           </Card>
         </Col>

@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import usersRouter from "./routes/usersRoutes.js";
-import expressAsyncHandler from "express-async-handler";
+import orderRouter from "./routes/ordersRoutes.js";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +22,7 @@ mongoose
 //Routes
 app.use("/api/products", productRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/orders", orderRouter);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
