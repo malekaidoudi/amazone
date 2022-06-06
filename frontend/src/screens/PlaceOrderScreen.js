@@ -42,7 +42,6 @@ function PlaceOrderScreen() {
   const totalOrder = totalPrice + shippingPrice + calculateTax;
   const placeOrderHandler = async () => {
     try {
-      console.log("Now");
       dispatch({ type: "CREATE-REQUEST" });
       const { data } = await axios.post(
         "/api/orders",
@@ -64,7 +63,7 @@ function PlaceOrderScreen() {
       ctxDispatch({ type: "CART-CLEAR" });
       dispatch({ type: "CREATE-SUCCESS" });
       localStorage.removeItem("cartItems");
-      navigate(`/order/${data.order._id}`);
+      navigate(`/orders/${data.order._id}`);
     } catch (error) {
       dispatch({ type: "CREATE-FAIL" });
       toast.error(getError(error));
